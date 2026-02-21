@@ -73,6 +73,8 @@ import {
   deleteInterviewExperience,
 } from "../controllers/studentControllers/interviewExperience.controller.js";
 
+import { getStudentNotifications } from "../controllers/studentControllers/notification.controller.js";
+
 const studentRouter = express.Router();
 studentRouter.use(express.json());
 
@@ -145,5 +147,7 @@ studentRouter.get("/interview-experiences", getInterviewExperiences);
 studentRouter.get("/interview-experience/:id", getInterviewExperienceById);
 studentRouter.put("/interview-experience/:id", updateInterviewExperience);
 studentRouter.delete("/interview-experience/:id", deleteInterviewExperience);
+
+studentRouter.get("/notifications", getStudentNotifications);
 
 export default studentRouter;
