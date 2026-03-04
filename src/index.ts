@@ -113,8 +113,8 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 });
 
 // ---------------- Server ----------------
-const PORT = Number(process.env.PORT) || 8080;
+const PORT = process.env.PORT || 3001;
 
-app.listen(PORT, "0.0.0.0", () => {
+app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
