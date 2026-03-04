@@ -15,6 +15,7 @@ const app = express();
 // ---------------- CORS (Using the package!) ----------------
 const allowedOrigins = [
   "https://tnp-frontend-gold.vercel.app",
+  "https://tnpportalbackend-production.up.railway.app",
   "http://localhost:3000",
   "http://localhost:3001",
 ];
@@ -113,7 +114,7 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 
 // ---------------- Server ----------------
 const PORT = process.env.PORT || 3001;
+
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📍 Base URL: ${process.env.BASE_URL}`);
 });
