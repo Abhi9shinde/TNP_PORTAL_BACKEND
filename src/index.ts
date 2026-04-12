@@ -9,6 +9,7 @@ import adminRouter from "./routes/admin.routes.js";
 import userRouter from "./routes/user.routes.js";
 import postingRouter from "./routes/posting.routes.js";
 import { requireRole } from "./middleware/roleGuard.js";
+import placementRouter from "./routes/placement.routes.js";
 
 const app = express();
 
@@ -63,6 +64,7 @@ app.use(
   adminRouter,
 );
 app.use("/api/v1/postings", checkJwt, postingRouter);
+app.use("/api/v1/placements", checkJwt, placementRouter);
 
 app.get("/secure-route", checkJwt, (req, res) => {
   res.json({ message: "You are authenticated!", user: req.auth?.payload.sub });

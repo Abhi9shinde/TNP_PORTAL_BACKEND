@@ -1,6 +1,4 @@
 import express from "express";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
 //Posting Controllers
 import {
   addPostingDetails,
@@ -32,7 +30,6 @@ import { getApplicationsForJob } from "../controllers/adminControllers/applicati
 import { bulkUpdateApplicationStatus } from "../controllers/adminControllers/applicationStatus.controller.js";
 //Excel Download Controller
 import { exportApplicationsCSV } from "../controllers/adminControllers/applicantsExcelDownload.controller.js";
-import { getStatistics } from "../controllers/adminControllers/statistics.controller.js";
 
 const adminRouter = express.Router();
 adminRouter.use(express.json());
@@ -63,7 +60,5 @@ adminRouter.get("/jobs/:jobId/applications", getApplicationsForJob);
 adminRouter.patch("/applications/status", bulkUpdateApplicationStatus);
 
 adminRouter.get("/jobs/:jobId/applications/download", exportApplicationsCSV);
-
-adminRouter.get("/statistics", getStatistics);
 
 export default adminRouter;
