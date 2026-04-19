@@ -5,6 +5,7 @@ import * as XLSX from "xlsx";
 export const exportApplicationsCSV = async (req: Request, res: Response) => {
   try {
     const { jobId } = req.params;
+    const { status } = req.query;
     console.log("Requested fields:", req.query);
     console.log(req.query.fields);
     const fields =
@@ -25,7 +26,10 @@ export const exportApplicationsCSV = async (req: Request, res: Response) => {
     }
 
     const applications = await db.application.findMany({
-      where: { jobPostId: jobId },
+      where: {
+        jobPostId: jobId,
+        ...(status && status !== "ALL" && { status: status as any }),
+      },
       include: {
         student: {
           include: {
@@ -103,9 +107,10 @@ export const exportApplicationsCSV = async (req: Request, res: Response) => {
       bookType: "xlsx",
     });
 
-    const fileName = `${job.company}-${job.role}-applications.xlsx`
-      .replace(/\s+/g, "-")
-      .toLowerCase();
+    const fileName =
+      `${job.company}-${job.role}-${status || "all"}-applications.xlsx`
+        .replace(/\s+/g, "-")
+        .toLowerCase();
 
     res.setHeader("Content-Disposition", `attachment; filename=${fileName}`);
     res.setHeader(
